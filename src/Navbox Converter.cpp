@@ -1,18 +1,21 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 int main(){
-	string navbox [1000000];
+	vector<string> navbox;
 	ifstream infile("navbox");
-	int count;
+	string item;
 
-	infile >> count;
-	for(int i = 0; i < count; i++){
-		infile >> navbox[i];
-		cout << navbox[i] << endl;
+	while(true){
+		infile >> item;
+		if(infile.eof())
+			break;
+
+		cout << item << endl;
 	}
 
 	//cout << navbox << endl;
