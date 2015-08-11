@@ -8,14 +8,25 @@ using namespace std;
 int main(){
 	vector<string> navbox;
 	ifstream infile("navbox");
-	string item;
 
-	while(true){
-		infile >> item;
+	if(!infile){
+		cout << "Um... something broke." << endl;
+		return 0;
+	}
+
+	while(1){
+		char buf[1000000];
+		infile.getline(&(buf[0]), 1000000, '\n');
+		navbox.push_back(string(buf));
 		if(infile.eof())
 			break;
+	}
 
-		cout << item << endl;
+	vector<string>::iterator viter = navbox.begin();
+
+	while(viter != navbox.end()){
+		cout << *viter << endl;
+		viter++;
 	}
 
 	//cout << navbox << endl;
