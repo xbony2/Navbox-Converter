@@ -1,0 +1,12 @@
+{{Navbox
+|title={{L|Santa's Toys}}
+|name=Navbox Santa's Toys
+|group1=Items
+|list1={{NID|mod=STS|Match|Santa's Toys}}{{,}}<!--
+        -->{{NI|mod=STS|Ender Blaster}}{{,}}<!--
+        -->{{NI|mod=STS|Nether Blaster}}
+|group2=Blocks
+|list2={{NI|mod=STS|Block of Damn Giving}}{{,}}<!--
+        -->{{NI|mod=V|Glowstone|Heavy Light}}{{,}}<!--
+        -->{{NI|mod=STS|Spiced Sand}}
+}}<noinclude>{{Navbox Applied Energistics/doc|the items in the [[Santa's Toys]] mod}}</noinclude>

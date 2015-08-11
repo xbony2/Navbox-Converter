@@ -1,15 +1,15 @@
-//============================================================================
-// Name        : Navbox.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-
 #include <iostream>
+#include <fstream>
+#include <string>
+
 using namespace std;
 
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	string navbox;
+	ifstream infile("navbox");
+	infile >> navbox;
+	cout << navbox << endl;
+	infile.close();
+
 	return 0;
 }
