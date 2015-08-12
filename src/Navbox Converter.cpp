@@ -64,7 +64,7 @@ public:
 		int num = 1;
 		while(viter != contents.end()){
 			if(viter->name != "")
-				wikitext =+ "|group" + num + "=" + viter->name + "\n";
+				wikitext =+ "|group" + to_string(num) + "=" + viter->name + "\n";
 			vector<NavboxThing>::iterator viter2 = viter->contents.begin();
 			bool firstTime = true;
 			while(viter2 != viter->contents.end()){
@@ -72,9 +72,9 @@ public:
 					NavboxItem item = (NavboxItem) viter2;
 					if(item.mod != ""){//If true, this assumes it is a link.
 						Link link = (Link) viter2;
-						wikitext += "|list" + num + "={{L|" + link.link + "|" + link.displayName + "}}{{,}}<!--";
+						wikitext += "|list" + to_string(num) + "={{L|" + link.link + "|" + link.displayName + "}}{{,}}<!--";
 					}else{
-						wikitext += "|list" + num + "={{NI|mod=" + item.mod + "|" + item.name + + "|" + item.link + "|" + item.displayName + "}}{{,}}<!--";
+						wikitext += "|list" + to_string(num) + "={{NI|mod=" + item.mod + "|" + item.name + + "|" + item.link + "|" + item.displayName + "}}{{,}}<!--";
 					}
 				}
 				viter2++;
