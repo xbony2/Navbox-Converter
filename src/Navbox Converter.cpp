@@ -5,19 +5,14 @@
 
 using namespace std;
 
+// For {{NI}}/{{L}}
 struct NavboxThing {
-	string link;
-	string displayName;
-};
-
-// For {{NI}}
-struct NavboxItem : NavboxThing {
 	string mod;
 	string name;
+	string link;
+	string displayName;
+	enum type {ITEM, LINK};
 };
-
-// For {{L}}
-struct Link : NavboxThing {};
 
 // {{Navbox}} group[1-20] parameters
 struct Group {
@@ -39,9 +34,8 @@ public:
 		while(viter != contents.end() && !foundMod){
 			vector<NavboxThing>::iterator viter2 = viter->contents.begin();
 			while(viter2 != viter->contents.end() && !foundMod){
-				NavboxItem item = (NavboxItem) viter2;
-				if(item.mod != ""){//TODO: Internet is down, I'm not sure how to do a null check
-					mod = item.mod;
+				if(viter2->type == viter2->ITEM){
+					mod = viter2->mod;
 					foundMod = true;
 				}
 				viter2++;
@@ -69,12 +63,10 @@ public:
 			bool firstTime = true;
 			while(viter2 != viter->contents.end()){
 				if(firstTime){
-					NavboxItem item = (NavboxItem) viter2;
-					if(item.mod != ""){//If true, this assumes it is a link.
-						Link link = (Link) viter2;
-						wikitext += "|list" + to_string(num) + "={{L|" + link.link + "|" + link.displayName + "}}{{,}}<!--";
+					if(viter2->type == viter2->LINK){
+						wikitext += "|list" + to_string(num) + "={{L|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
 					}else{
-						wikitext += "|list" + to_string(num) + "={{NI|mod=" + item.mod + "|" + item.name + + "|" + item.link + "|" + item.displayName + "}}{{,}}<!--";
+						wikitext += "|list" + to_string(num) + "={{NI|mod=" + viter2->mod + "|" + viter2->name + + "|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
 					}
 				}
 				viter2++;
