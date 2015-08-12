@@ -64,11 +64,16 @@ public:
 			bool firstTime = true;
 			while(viter2 != viter->contents.end()){
 				if(firstTime){
-					if(viter2->type == viter2->LINK){
+					if(viter2->type == viter2->LINK)
 						wikitext += "|list" + to_string(num) + "={{L|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
-					}else{
+					else
 						wikitext += "|list" + to_string(num) + "={{NI|mod=" + viter2->mod + "|" + viter2->name + + "|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
-					}
+					firstTime = false;
+				}else{
+					if(viter2->type == viter2->LINK)
+						wikitext += "        -->{{L|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
+					else
+						wikitext += "        -->{{NI|mod=" + viter2->mod + "|" + viter2->name + + "|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
 				}
 				viter2++;
 			}
