@@ -11,7 +11,8 @@ struct NavboxThing {
 	string name;
 	string link;
 	string displayName;
-	enum type {ITEM, LINK};
+	enum Type {ITEM, LINK};
+	Type type;
 };
 
 // {{Navbox}} group[1-20] parameters
