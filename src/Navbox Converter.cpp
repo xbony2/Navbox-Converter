@@ -62,6 +62,7 @@ public:
 				wikitext =+ "|group" + to_string(num) + "=" + viter->name + "\n";
 			vector<NavboxThing>::iterator viter2 = viter->contents.begin();
 			bool firstTime = true;
+			bool lastTime = false;
 			while(viter2 != viter->contents.end()){
 				if(firstTime){
 					if(viter2->type == viter2->LINK)
@@ -69,11 +70,18 @@ public:
 					else
 						wikitext += "|list" + to_string(num) + "={{NI|mod=" + viter2->mod + "|" + viter2->name + + "|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
 					firstTime = false;
+				}else if(lastTime){
+					if(viter2->type == viter2->LINK)
+						wikitext += "        -->{{L|" + viter2->link + "|" + viter2->displayName + "}}";
+					else
+						wikitext += "        -->{{NI|mod=" + viter2->mod + "|" + viter2->name + + "|" + viter2->link + "|" + viter2->displayName + "}}";
 				}else{
 					if(viter2->type == viter2->LINK)
 						wikitext += "        -->{{L|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
 					else
 						wikitext += "        -->{{NI|mod=" + viter2->mod + "|" + viter2->name + + "|" + viter2->link + "|" + viter2->displayName + "}}{{,}}<!--";
+					if(viter2 - 1 == viter->contents.end())
+						lastTime = true;
 				}
 				viter2++;
 			}
