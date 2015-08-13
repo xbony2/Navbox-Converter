@@ -102,6 +102,8 @@ public:
 };
 
 int main(){
+	vector<int> v(3);
+	v = {1, 5, 7};
 	Navbox navbox = new Navbox("{{L|Santa's Toys}}", "Navbox Santa's Toys", new vector<Group>{
 		{"Items", new vector<NavboxThing>{{NavboxThing::ITEM, "STS", "Match"}, {NavboxThing::ITEM, "STS", "Ender Blaster"}, {NavboxThing::ITEM, "STS", "Nether Blaster"}}},
 		{"Blocks", new vector<NavboxThing>{{NavboxThing::ITEM, "STS", "Block of Damn Giving"}, {NavboxThing::ITEM, "V", "Glowstone", "Heavy Light"}, {NavboxThing::ITEM, "STS", "Spiced Sand"}}}});
