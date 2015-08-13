@@ -102,11 +102,11 @@ public:
 };
 
 int main(){
-	using NavboxThing::ITEM;
+	Navbox navbox = new Navbox("{{L|Santa's Toys}}", "Navbox Santa's Toys", new vector<Group>{
+		{"Items", new vector<NavboxThing>{{NavboxThing::ITEM, "STS", "Match"}, {NavboxThing::ITEM, "STS", "Ender Blaster"}, {NavboxThing::ITEM, "STS", "Nether Blaster"}}},
+		{"Blocks", new vector<NavboxThing>{{NavboxThing::ITEM, "STS", "Block of Damn Giving"}, {NavboxThing::ITEM, "V", "Glowstone", "Heavy Light"}, {NavboxThing::ITEM, "STS", "Spiced Sand"}}}});
 
-	string navbox = new Navbox("{{L|Santa's Toys}}", "Navbox Santa's Toys", new vector<Group>{
-		{"Items", new vector<NavboxThing>{{ITEM, "STS", "Match"}, {ITEM, "STS", "Ender Blaster"}, {ITEM, "STS", "Nether Blaster"}}},
-		{"Blocks", new vector<NavboxThing>{{ITEM, "STS", "Block of Damn Giving"}, {ITEM, "V", "Glowstone", "Heavy Light"}, {ITEM, "STS", "Spiced Sand"}}}}).toWikitext();
+	string navboxS = navbox.toWikitext();
 	/*ifstream infile("navbox");
 
 	if(!infile){
