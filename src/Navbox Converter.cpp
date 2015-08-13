@@ -7,12 +7,12 @@ using namespace std;
 
 // For {{NI}}/{{L}}
 struct NavboxThing {
+	enum Type {ITEM, LINK};
+	Type type;
 	string mod;
 	string name;
 	string link;
 	string displayName;
-	enum Type {ITEM, LINK};
-	Type type;
 };
 
 // {{Navbox}} group[1-20] parameters
@@ -102,8 +102,12 @@ public:
 };
 
 int main(){
-	string navbox;
-	ifstream infile("navbox");
+	using NavboxThing::ITEM;
+
+	string navbox = new Navbox("{{L|Santa's Toys}}", "Navbox Santa's Toys", new vector<Group>{
+		{"Items", new vector<NavboxThing>{{ITEM, "STS", "Match"}, {ITEM, "STS", "Ender Blaster"}, {ITEM, "STS", "Nether Blaster"}}},
+		{"Blocks", new vector<NavboxThing>{{ITEM, "STS", "Block of Damn Giving"}, {ITEM, "V", "Glowstone", "Heavy Light"}, {ITEM, "STS", "Spiced Sand"}}}}).toWikitext();
+	/*ifstream infile("navbox");
 
 	if(!infile){
 		cout << "Um... something broke." << endl;
@@ -118,9 +122,9 @@ int main(){
 			break;
 	}
 
-	cout << navbox << endl;
+	infile.close();*/
 
-	infile.close();
+	cout << navbox << endl;
 
 	return 0;
 }
