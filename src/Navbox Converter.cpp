@@ -53,7 +53,7 @@ public:
 
 	string toWikitext(){
 		string wikitext = "{{Navbox\n";
-		wikitext =+ "|title=" + title + "\n";
+		wikitext =+ "|title={{L|" + title + "}}\n";
 		wikitext =+ "|name=" + name + "\n";
 		vector<Group>::iterator viter = contents.begin();
 		int num = 1;
@@ -90,19 +90,32 @@ public:
 			viter++;
 		}
 
-		wikitext =+ "}}<noinclude>{{Navbox Applied Energistics/doc|the items in the " + title + " mod}}</noinclude>\n";
+		wikitext =+ "}}<noinclude>{{Navbox Applied Energistics/doc|the items in the {{L|" + title + "}} mod}}</noinclude>\n";
 
 		return wikitext;
 	}
 
 	string toLua(){
-		return ""; //TODO
+		string lua = "-- <languages />\n";
+		lua += "--<pre>\n";
+		lua += "local p = {}\n";
+		lua += "p.navbox = function(navbox, highlightline, group, list, line, ni, l)\n\n";
+		lua += "local navTitle = = l{\"" + title + "\", [=[<translate>" + title + "</translate>]=]}\n\n";
+		vector<Group>::iterator viter = contents.begin();
+		while(viter != contents.end()){
+			lua += "local group" + viter->name /*TODO: some sort of formating here*/ + " = [=[<translate>" + name + "</translate>]=]\n";
+		}
+
+		lua += "end\n";
+		lua += "return p\n";
+		lua += "--</pre>\n";
+		return lua;
 	}
 
 };
 
 int main(){
-	Navbox navbox = new Navbox("{{L|Santa's Toys}}", "Navbox Santa's Toys", vector<Group>{
+	Navbox navbox = new Navbox("Santa's Toys", "Navbox Santa's Toys", new vector<Group>{
 		{"Items", new vector<NavboxThing>{{NavboxThing::ITEM, "STS", "Match"}, {NavboxThing::ITEM, "STS", "Ender Blaster"}, {NavboxThing::ITEM, "STS", "Nether Blaster"}}},
 		{"Blocks", new vector<NavboxThing>{{NavboxThing::ITEM, "STS", "Block of Damn Giving"}, {NavboxThing::ITEM, "V", "Glowstone", "Heavy Light"}, {NavboxThing::ITEM, "STS", "Spiced Sand"}}}});
 
@@ -124,7 +137,7 @@ int main(){
 
 	infile.close();*/
 
-	cout << navbox << endl;
+	cout << navboxS << endl;
 
 	return 0;
 }
